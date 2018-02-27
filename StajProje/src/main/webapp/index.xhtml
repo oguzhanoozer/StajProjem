@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <h:head>
+        <title>BİLGİ GÜVENLİĞİ İHLAl OLAYLARI İHBAR SAYFASI</title>
+        
+         <style>
+         h3{color:#663333}
+         body{background-color: #A4A4A4;}
+         
+         form {background-color: #5FB404;
+         	width:800px;
+    		height:auto;
+			margin:auto;
+			padding:20px; 
+			 font-weight:bold;
+			}
+		h3{text-align: center;}	
+		.error{
+			color:red;}
+		</style> 
+		
+    </h:head>
+    
+    
+    <h:body>
+		
+    	<h:form class ="bas_kisim" enctype="multipart/form-data">
+    	<h3>BİLGİ GÜVENLİĞİ İHLAl OLAYLARI İHBAR SAYFASI</h3>
+    		<hr/><br/>
+    	   <h:panelGrid columns="4">
+    	  		 <h:outputLabel>İsim : </h:outputLabel>
+      	  		 <h:inputText value="#{user.ad}" id="ad" size="27"></h:inputText>
+				 <h:commandButton value="ADMİN" action="login.xhtml?faces-redirect=true"></h:commandButton>
+				 <h:outputLabel></h:outputLabel>
+				 							 
+      							
+      			<h:outputLabel>Olay Tarihi : </h:outputLabel> 
+      			<h:inputText id="date" value="#{user.olaySaati}" a:placeholder="01.01.2018"
+				size="27" required="false"
+				label="Receipt Date" >
+				
+				<f:convertDateTime pattern="dd.MM.yyyy" />
+				</h:inputText>
+				<h:outputLabel></h:outputLabel>
+			    <h:message for="date" style="color:red" />
+     
+      		  
+      		    <h:outputLabel>Olay Açıklaması :  </h:outputLabel> 
+        		<h:inputTextarea rows="10" cols="26" value="#{user.olay}" id="olay"></h:inputTextarea>
+     		 	<h:outputLabel></h:outputLabel>
+     		 	<h:outputLabel></h:outputLabel>
+       		   	
+      		 	<h:outputLabel>Dosya Seçin :  </h:outputLabel>
+      		   	<h:inputFile value="#{user.file}"></h:inputFile>
+      		     
+      		    <h:commandButton value="YÜKLE" actionListener="#{user.upload}"></h:commandButton>
+      		     
+      		     
+      		    <h:outputText value="#{user.yuklemeDurumu}"></h:outputText> 
+      		    
+      		
+       		   	<h:outputLabel></h:outputLabel>
+      			<h:commandButton value="Gönder" onclick="alertFunction()" action="#{user.outcome}" actionListener="#{user.servisleriCagir}"></h:commandButton>
+      			
+      		  </h:panelGrid>
+       		  
+	         </h:form>
+    </h:body>
+    
+</html>

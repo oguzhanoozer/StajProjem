@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <h:head>
+        
+          <style>
+         h3{color:#663333}
+         body{background-color: #A4A4A4;}
+         
+         form {background-color: #5FB404;
+         	
+			padding:20px; 
+			 font-weight:bold;
+			}
+		h3{text-align: center;}	
+		.error{
+			color:red;}
+        </style>
+        
+    </h:head>
+        
+    <h:body>
+    	<h:form>
+    	<h3>Bilgi Güvenliği İhlal Olayları İhbar Sayfası Bilgi Güncelleme Paneli</h3>
+    	<hr/><br/>
+	    	<h:panelGrid columns="2">
+	    		<h:outputLabel value="ID : "></h:outputLabel>
+				<h:inputText  value="#{guncelle.veri.islemId}" var="islemId"></h:inputText>
+			
+				
+				<h:outputLabel value="İsim :"></h:outputLabel>
+				<h:inputText  value="#{guncelle.veri.ad}"></h:inputText>
+				
+				<h:outputLabel value="Olay : "></h:outputLabel>
+				<h:inputText  value="#{guncelle.veri.olay}"></h:inputText>
+			
+				<h:outputLabel value="Olay Saati : "></h:outputLabel>
+				<h:inputText  value="#{guncelle.veri.olaySaat}"></h:inputText>
+			
+				<h:outputLabel value="Durum : " ></h:outputLabel>
+				<h:selectOneMenu value = "#{guncelle.veri.durum}" var="durum"> 
+				<f:selectItem itemValue = "Belirtilmemis" itemLabel = "Belirtilmemis" /> 
+	            <f:selectItem itemValue = "İptal **" itemLabel = "İptal" /> 
+	            <f:selectItem itemValue = "1.Uyarı Cezası **" itemLabel = "1.Uyarı Cezası" /> 
+	            <f:selectItem itemValue = "2.Uyarı Cezası **" itemLabel = "2.Uyarı Cezası" /> 
+	            <f:selectItem itemValue = "Disipline Sevk Edildi **" itemLabel = "Disipline Sevk Edildi" /> 
+	            <f:selectItem itemValue = "Bilgilendirme Yapıldı **" itemLabel = "Bilgilendirme Yapıldı" />  
+	            <f:selectItem itemValue = "Devam Ediyor **" itemLabel = "Devam Ediyor" />     
+	        	 </h:selectOneMenu>  
+				
+		
+				<h:outputLabel value="Açıklama : "></h:outputLabel>
+				<h:inputTextarea rows="10" cols="30" value="#{guncelle.veri.aciklama}" var="aciklama"></h:inputTextarea >
+				
+				<h:outputLabel value=""></h:outputLabel>
+				<h:commandButton value="Güncelle Onay" action="#{guncelleOnay.guncelleOnaylama}">
+					<f:setPropertyActionListener target="#{guncelleOnay.islemId}" value="#{guncelle.veri.islemId}"/>
+    				<f:setPropertyActionListener target="#{guncelleOnay.durum}" value="#{guncelle.veri.durum}"/>
+    				<f:setPropertyActionListener target="#{guncelleOnay.aciklama}" value="#{guncelle.veri.aciklama}"/>
+    			</h:commandButton>
+				
+				
+			</h:panelGrid>
+		</h:form>
+		
+	</h:body>
+	  		
+</html>

@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+	<title>BİLGİ GÜVENLİĞİ İHLAl OLAYLARI İHBAR SAYFASI</title>
+
+	<style>
+	
+	 body{background-color: #A4A4A4;}
+	 
+		h1{
+			color: #088A08;
+			text-align: center;
+		}
+		
+		head {
+			color: #663333;
+		}
+		
+		
+		</style>
+		
+		<script>
+			function alertFunction() {
+				    alert("Döküman W:\ Klasörüne Yüklenmiştir.");
+			}
+		</script>
+
+</h:head>
+
+<h:body>
+	<h:form>
+		<h1>Bilgi Güvenliği İhlal Olayları İhbar Sayfası İhbar Dökümanları</h1>
+
+		<h:panelGrid columns="3">
+		<h:outputText value="Durum Onayına Göre Seçim Yapınız !"></h:outputText>
+	
+		<h:selectOneMenu value="#{veriCek.durumTipi}">
+			<f:selectItem itemValue="Secenekler" itemLabel="Secenekler" />
+			<f:selectItem itemValue="Tüm İhbarlar" itemLabel="Tüm İhbarlar" />
+   			<f:selectItem itemValue="Belirtilmemis" itemLabel="Belirtilmemis" />
+   			<f:selectItem itemValue="Iptal" itemLabel="Iptal" /> 
+   			<f:selectItem itemValue="1.Uyarı Cezası" itemLabel="1.Uyarı Cezası" />
+   			<f:selectItem itemValue="2.Uyarı Cezası" itemLabel="2.Uyarı Cezası" />
+  			<f:selectItem itemValue="Disipline Sevk Edildi" itemLabel="Disipline Sevk Edildi" />
+   			<f:selectItem itemValue="Bilgilendirme Yapıldı" itemLabel="Bilgilendirme Yapıldı" />			
+   			<f:selectItem itemValue="Devam Ediyor" itemLabel="Devam Ediyor" />
+   		</h:selectOneMenu>
+		
+
+		<h:commandButton value="Göster" action="#{veriCek.sayfa}" actionListener="#{veriCek.ihbarSay}"></h:commandButton>
+			
+		
+		<h:outputText value="Sistemdeki İhbar Sayisi      :"></h:outputText>
+		<h:outputText value="#{veriCek.ihbarSayisi}"></h:outputText>
+		<h:outputText></h:outputText>
+		
+		
+		</h:panelGrid>	
+		
+		
+		<h:outputLabel value="____________________________________________________________________"></h:outputLabel>
+		
+		
+		<table class="order-table">
+			<ui:repeat var="a" value="#{veriCek.veriList}">
+				<tr>
+					<td class="order-table-even-row"  style="font-weight:bold;">İhbar İd : </td>
+					<td class="order-table-even-row">#{a.islemId}</td>
+				</tr>
+				
+				
+				<tr>
+					<td class="order-table-even-row" style="font-weight:bold;">İsim : </td>
+					<td class="order-table-even-row">#{a.ad}</td>
+				</tr>
+				
+				
+					
+				<tr>
+					<td class="order-table-even-row"	style="font-weight:bold;">Olay : </td>
+					<td class="order-table-even-row">#{a.olay}</td>
+				</tr>
+				
+				
+				<tr>
+					<td class="order-table-even-row"	style="font-weight:bold;">Olay Tarihi : </td>
+					<td class="order-table-even-row">#{a.olaySaat}</td>
+				</tr>
+			
+			
+				<tr>
+					<td class="order-table-even-row"	style="font-weight:bold;">Yüklenenler : </td>
+					<td class="order-table-even-row">
+						<h:commandButton value="Dosyayı İndir" onclick="alertFunction()" action="#{userController.download}">
+							<f:setPropertyActionListener target="#{userController.veriID}" 	value="#{a.islemId}"/>
+						</h:commandButton>
+					</td>
+				</tr>
+			
+			
+				<tr>
+					<td class="order-table-even-row"	style="font-weight:bold;">Durum : </td>
+					<td class="order-table-even-row">#{a.durum}</td>
+				</tr>
+				
+	
+				<tr>
+					<td class="order-table-even-row"	style="font-weight:bold;">Açıklama : </td>	
+						<td class="order-table-even-row">#{a.aciklama}</td>
+				</tr>
+				
+				<tr>
+					<td class="order-table-even-row"> </td>
+					<td class="order-table-even-row">
+						<h:commandButton value="Güncelle" action="#{guncelle.veriGuncelle}">
+							<f:setPropertyActionListener target="#{guncelle.veriID}" value="#{a.islemId}" />
+						</h:commandButton>
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="order-table-even-row">_______________</td>
+					<td class="order-table-even-row">____________________________________________</td>
+				</tr>
+				
+				
+					
+			</ui:repeat>
+		
+			
+		</table>
+				<h:panelGrid columns="2">
+				<h:outputLabel value=""></h:outputLabel>
+				<h:commandButton value="Çıkış Yap" action="login.xhtml?faces-redirect=true"></h:commandButton>
+					</h:panelGrid>
+	</h:form>
+</h:body>
+
+</html>
